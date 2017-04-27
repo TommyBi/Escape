@@ -1,3 +1,5 @@
+declare class ButtonGraySkin extends eui.Skin{
+}
 declare class MapItemSkin extends eui.Skin{
 }
 declare class MapScreenSkin extends eui.Skin{

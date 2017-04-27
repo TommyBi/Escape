@@ -16,6 +16,7 @@
   },
   "autoGenerateExmlsList": true,
   "exmls": [
+    "resource/eui_skins/escapeSkin/ButtonGraySkin.exml",
     "resource/eui_skins/escapeSkin/MapItemSkin.exml",
     "resource/eui_skins/escapeSkin/MapScreenSkin.exml",
     "resource/eui_skins/other/ButtonSkin.exml",
