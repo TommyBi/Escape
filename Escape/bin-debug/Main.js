@@ -128,9 +128,45 @@ var Main = (function (_super) {
     p.startCreateScene = function () {
         // var sky:egret.Bitmap = this.createBitmapByName("bg_main_jpg");
         // this.addChild(sky);
+        var _this = this;
         // 初始化游戏地图主界面
-        var mainScene = new Game.mapScreen();
-        this.addChild(mainScene);
+        this.scrOne = new Game.ScreenOne();
+        this.scrTwo = new Game.ScreenTwo();
+        this.scrThree = new Game.ScreenThree();
+        this.scrFour = new Game.ScreenFour();
+        this.addChild(this.scrOne);
+        this.addChild(this.scrTwo);
+        this.addChild(this.scrThree);
+        this.addChild(this.scrFour);
+        this.scrFour.visible = false;
+        this.scrThree.visible = false;
+        this.scrTwo.visible = false;
+        Game.playerEvent = new Game.AllEvent();
+        Game.playerEvent.addEventListener(Game.PlayerEvent.PLAYERCHANGEMAP, function (event) {
+            if (event.data) {
+                var nextScreenNum = event.data.nextScreen;
+                if (nextScreenNum) {
+                    _this.scrOne.visible = false;
+                    _this.scrFour.visible = false;
+                    _this.scrThree.visible = false;
+                    _this.scrTwo.visible = false;
+                    switch (nextScreenNum) {
+                        case 1:
+                            _this.scrOne.visible = true;
+                            break;
+                        case 2:
+                            _this.scrTwo.visible = true;
+                            break;
+                        case 3:
+                            _this.scrThree.visible = true;
+                            break;
+                        case 4:
+                            _this.scrFour.visible = true;
+                            break;
+                    }
+                }
+            }
+        }, this);
         // var stageW:number = this.stage.stageWidth;
         // var stageH:number = this.stage.stageHeight;
         // sky.width = stageW;

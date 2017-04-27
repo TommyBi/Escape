@@ -124,6 +124,13 @@ class Main extends eui.UILayer {
         }
     }
     private textfield:egret.TextField;
+
+    /** 创建界面的单例 */
+    public scrOne:Game.ScreenOne;
+    public scrTwo:Game.ScreenTwo;
+    public scrThree:Game.ScreenThree;
+    public scrFour:Game.ScreenFour;
+
     /**
      * 创建场景界面
      * Create scene interface
@@ -133,8 +140,45 @@ class Main extends eui.UILayer {
         // this.addChild(sky);
 
         // 初始化游戏地图主界面
-        let mainScene = new Game.mapScreen();
-        this.addChild(mainScene);
+        this.scrOne = new Game.ScreenOne();
+        this.scrTwo = new Game.ScreenTwo();
+        this.scrThree = new Game.ScreenThree();
+        this.scrFour = new Game.ScreenFour();
+        this.addChild(this.scrOne);
+        this.addChild(this.scrTwo);
+        this.addChild(this.scrThree);
+        this.addChild(this.scrFour);
+        this.scrFour.visible = false;
+        this.scrThree.visible = false;
+        this.scrTwo.visible = false;  
+        Game.playerEvent = new Game.AllEvent();
+
+        Game.playerEvent.addEventListener(Game.PlayerEvent.PLAYERCHANGEMAP, (event: { data: { curItemId:number, curScreen:number ,nextScreen:number} }) => {
+            if (event.data) {
+                let nextScreenNum = event.data.nextScreen;
+                if (nextScreenNum){
+                    this.scrOne.visible = false;
+                    this.scrFour.visible = false;
+                    this.scrThree.visible = false;
+                    this.scrTwo.visible = false;  
+                    switch(nextScreenNum){
+                        case 1:
+                            this.scrOne.visible = true;
+                        break;
+                        case 2: 
+                            this.scrTwo.visible = true;
+                        break;
+                        case 3:
+                            this.scrThree.visible = true;
+                        break;
+                        case 4:
+                            this.scrFour.visible = true;
+                        break;
+                    }  
+                }
+            }
+        }, this);
+        
 
         // var stageW:number = this.stage.stageWidth;
         // var stageH:number = this.stage.stageHeight;

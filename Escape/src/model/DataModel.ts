@@ -1,4 +1,5 @@
 namespace Game{
+    export var playerEvent:Game.AllEvent;
 
     export class DataModal extends egret.EventDispatcher {
         _properties = [];
@@ -83,5 +84,11 @@ namespace Game{
             this.dispatchEventWith("propertiesChanged");
         }
         
+    }
+
+    export class AllEvent extends DataModal{
+        constructor(){
+            super();
+        }
     }
 }

@@ -8,5 +8,6 @@
 				<e:TileLayout horizontalGap="0" verticalGap="0" requestedRowCount="28" requestedColumnCount="16"/>
 			</e:layout>
 		</e:DataGroup>
+		<e:Label id="labelSign" text="Label" x="72" y="108"/>
 	</e:Group>
 </e:Skin>

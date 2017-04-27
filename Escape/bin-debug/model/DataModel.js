@@ -85,5 +85,15 @@ var Game;
     }(egret.EventDispatcher));
     Game.DataModal = DataModal;
     egret.registerClass(DataModal,'Game.DataModal');
+    var AllEvent = (function (_super) {
+        __extends(AllEvent, _super);
+        function AllEvent() {
+            _super.call(this);
+        }
+        var d = __define,c=AllEvent,p=c.prototype;
+        return AllEvent;
+    }(DataModal));
+    Game.AllEvent = AllEvent;
+    egret.registerClass(AllEvent,'Game.AllEvent');
 })(Game || (Game = {}));
 //# sourceMappingURL=DataModel.js.map

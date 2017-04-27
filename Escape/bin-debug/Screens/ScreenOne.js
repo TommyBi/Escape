@@ -9,14 +9,14 @@
 var Game;
 (function (Game) {
     /** 主场景界面 */
-    var mapScreen = (function (_super) {
-        __extends(mapScreen, _super);
-        function mapScreen() {
+    var ScreenOne = (function (_super) {
+        __extends(ScreenOne, _super);
+        function ScreenOne() {
             _super.call(this);
             this.skinName = "MapScreenSkin";
+            ScreenOne.instance = this;
         }
-        var d = __define,c=mapScreen,p=c.prototype;
-        ;
+        var d = __define,c=ScreenOne,p=c.prototype;
         p.createChildren = function () {
             var gridsData = []; //448
             for (var a = 1; a <= 448; a++) {
@@ -31,11 +31,12 @@ var Game;
             this.dataList = new eui.ArrayCollection(gridsData);
             this.listGrids.itemRenderer = mapItemRender;
             this.listGrids.dataProvider = this.dataList;
+            this.labelSign.text = "1";
         };
-        return mapScreen;
+        return ScreenOne;
     }(Game.BaseScreen));
-    Game.mapScreen = mapScreen;
-    egret.registerClass(mapScreen,'Game.mapScreen');
+    Game.ScreenOne = ScreenOne;
+    egret.registerClass(ScreenOne,'Game.ScreenOne');
     /** 每一个格子的界面 */
     var mapItemRender = (function (_super) {
         __extends(mapItemRender, _super);
@@ -45,14 +46,19 @@ var Game;
             this.imgBg.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onTouch, this);
         }
         var d = __define,c=mapItemRender,p=c.prototype;
-        //
+        //响应按钮点击
         p.onTouch = function () {
             egret.log("touch");
             this.imgBg.source = RES.getRes("main_json.map_close");
+            //qiehuan 
+            Game.playerEvent.dispatchEventWith(Game.PlayerEvent.PLAYERCHANGEMAP, false, {
+                curItemId: 1,
+                curScreen: 1,
+                nextScreen: 2,
+            });
         };
         p.dataChanged = function () {
             egret.log("datachanged");
-            //this.imgBg.source = RES.getRes("main_json.map_open")
         };
         return mapItemRender;
     }(CustomItemRenderer));
@@ -76,4 +82,4 @@ var Game;
     Game.GridsModel = GridsModel;
     egret.registerClass(GridsModel,'Game.GridsModel');
 })(Game || (Game = {}));
-//# sourceMappingURL=MapScreen.js.map
+//# sourceMappingURL=ScreenOne.js.map

@@ -10,17 +10,20 @@
 namespace Game {
 
 	/** 主场景界面 */
-	export class mapScreen extends BaseScreen {
+	export class ScreenOne extends BaseScreen {
 		//eui 
+		static instance: ScreenOne;
 		public GroupMapItem:eui.Group;
 		public listGrids:eui.DataGroup;
+		public labelSign:eui.Label;
 
 		//control
-		private dataList:eui.ArrayCollection;;
+		private dataList:eui.ArrayCollection;
 
 		public constructor() {
 			super();
 			this.skinName = "MapScreenSkin";
+			ScreenOne.instance = this;
 		}
 
 		protected createChildren(): void {
@@ -37,6 +40,7 @@ namespace Game {
 			this.dataList = new eui.ArrayCollection(gridsData);
             this.listGrids.itemRenderer = mapItemRender;
             this.listGrids.dataProvider = this.dataList;
+			this.labelSign.text = "1";
         }
 	}
 	
@@ -54,6 +58,13 @@ namespace Game {
 		private onTouch(){
 			egret.log("touch");
 			this.imgBg.source = RES.getRes("main_json.map_close");
+
+			// 切换界面 参数可以待定
+			playerEvent.dispatchEventWith(PlayerEvent.PLAYERCHANGEMAP,false,{
+					curItemId:1,
+					curScreen:1,
+					nextScreen:2,
+                })
 		}
 
 		protected dataChanged(): void {
