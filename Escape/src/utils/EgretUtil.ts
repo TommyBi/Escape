@@ -253,6 +253,5 @@ class CustomItemRenderer extends eui.ItemRenderer {
 
 	protected createChildren() {
 		super.createChildren();
-		this.translate();
 	}
 }

@@ -167,7 +167,6 @@ var CustomItemRenderer = (function (_super) {
     var d = __define,c=CustomItemRenderer,p=c.prototype;
     p.createChildren = function () {
         _super.prototype.createChildren.call(this);
-        this.translate();
     };
     return CustomItemRenderer;
 }(eui.ItemRenderer));
