@@ -45,8 +45,18 @@ namespace Game {
 			if (this.dataList.length == 0) {
 				return false;
 			}
-
-			return true;
+			let tmpList : eui.ArrayCollection = <eui.ArrayCollection> this.listGrids.dataProvider;
+            for (var index = 0; index < tmpList.length; index++) {
+                let item = tmpList.getItemAt(index) as dataEscapeOne;
+                if (item.id == id){
+					item.isPass = true;
+					if(item.advance){
+						// datachange中会替换资源
+						return true;
+					}
+				}
+            }
+			return false;
 		}
 
 		public NotifyBlockUpdate(id:number) : void {
@@ -58,7 +68,7 @@ namespace Game {
 	/** 每一个格子的界面 */
 	export class mapItemRender extends CustomItemRenderer{
 		public imgBg:eui.Image;
-
+		public data:dataEscapeOne;
 		public constructor() {
 			super();
 			this.skinName = "MapItemSkin";
@@ -75,12 +85,26 @@ namespace Game {
 			Game.player.JudgeCurPlayerValue(e.stageX, e.stageY);
 			
 			// 换肤
+			let curScreenId : number = Game.player.GetScreenId();
 			let curBlockId : number = Game.player.GetCurBlockId();
-			let isAdvance : boolean = Game.scrOne.JudgeIfCanAdvance(curBlockId);
+			let isAdvance : boolean = false;
+			if (curScreenId == 1) {
+				isAdvance = Game.scrOne.JudgeIfCanAdvance(curBlockId);
+				Game.scrOne.NotifyBlockUpdate(curBlockId);
+			} else if (curScreenId == 2) {
+				isAdvance = Game.scrTwo.JudgeIfCanAdvance(curBlockId);
+				Game.scrTwo.NotifyBlockUpdate(curBlockId);
+			} 
+			// else if (curScreenId == 3) {
+			// 	isAdvance = Game.scrThree.JudgeIfCanAdvance(curBlockId);
+			// 	Game.scrThree.NotifyBlockUpdate(curBlockId);
+			// } else if (curScreenId == 4) {
+			// 	isAdvance = Game.scrFour.JudgeIfCanAdvance(curBlockId);
+			// 	Game.scrFour.NotifyBlockUpdate(curBlockId);
+			// }
 			if (isAdvance) {
 
 			}
-			Game.scrOne.NotifyBlockUpdate(curBlockId);
 			
 			// 移动主角
 			let moveDirection : number = Game.player.GetMoveDirection();
@@ -104,6 +128,9 @@ namespace Game {
 
 		protected dataChanged(): void {
 			egret.log("datachanged");
+			if(this.data.isPass){
+				
+			}
 		} 
 	}
 }

@@ -32,6 +32,34 @@ namespace Game{
                 }
             }
         }
+    }
 
+     export class dataEscapeTwo extends DataModal{
+        /** id */
+        id:number = 0;  
+        /** 能否通过 */
+        advance:number = 1;
+        /** 门id */
+        type:number = 0 ;
+        /** 包含物品 */
+        addGoods:number = 0;
+        linkNodeId:string = "";
+        linkList:number[] = [];
+        isPass:boolean = false;
+
+        public constructor(data?){
+            super();
+            this.setData(data);
+            this.getLinks();
+        }
+        
+        public getLinks(){
+            if(this.linkNodeId.length >0){
+                let a = this.linkNodeId.split(',');
+                for(let b of a){
+                    this.linkList.push(parseInt(b));
+                }
+            }
+        }
     }
 }
