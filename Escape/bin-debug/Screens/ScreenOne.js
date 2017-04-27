@@ -50,7 +50,7 @@ var Game;
         p.onTouch = function () {
             egret.log("touch");
             this.imgBg.source = RES.getRes("main_json.map_close");
-            //qiehuan 
+            // 切换界面 参数可以待定
             Game.playerEvent.dispatchEventWith(Game.PlayerEvent.PLAYERCHANGEMAP, false, {
                 curItemId: 1,
                 curScreen: 1,

@@ -28,6 +28,7 @@ var game_file_list = [
 	"bin-debug/utils/JsUtil.js",
 	"bin-debug/utils/ObjectPool.js",
 	"bin-debug/utils/sha1.js",
+	"bin-debug/model/Player.js",
 	//----auto game_file_list end----
 ];
 

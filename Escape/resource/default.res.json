@@ -132,20 +132,20 @@
 			"name": "egret_icon_png"
 		},
 		{
-			"name": "description_json",
+			"url": "config/description.json",
 			"type": "json",
-			"url": "config/description.json"
+			"name": "description_json"
 		},
 		{
-			"name": "bg_main_jpg",
+			"url": "assets/bg_main.jpg",
 			"type": "image",
-			"url": "assets/bg_main.jpg"
+			"name": "bg_main_jpg"
 		},
 		{
-			"name": "main_json",
-			"type": "sheet",
 			"url": "assets/Texture/main.json",
-			"subkeys": "map_close,map_open,sister"
+			"type": "sheet",
+			"name": "main_json",
+			"subkeys": "map_close,map_open,player,sister"
 		}
 	]
 }

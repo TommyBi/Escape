@@ -153,6 +153,14 @@ class Main extends eui.UILayer {
         this.scrTwo.visible = false;  
         Game.playerEvent = new Game.AllEvent();
 
+        Game.player  = Game.Player.GetInstance();
+        Game.player.m_node = this.createBitmapByName("main_json.player");
+        Game.player.m_node.x = 0;
+        Game.player.m_node.y = 1096;
+        Game.player.SetScreenId(0);
+        this.addChild(Game.player.m_node);
+        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPlayerMove, this);
+
         Game.playerEvent.addEventListener(Game.PlayerEvent.PLAYERCHANGEMAP, (event: { data: { curItemId:number, curScreen:number ,nextScreen:number} }) => {
             if (event.data) {
                 let nextScreenNum = event.data.nextScreen;
@@ -300,4 +308,74 @@ class Main extends eui.UILayer {
     //     panel.verticalCenter = 0;
     //     this.addChild(panel);
     // }
+    private onPlayerMove(e: egret.TouchEvent) {
+        let touchX : number = e.stageX;
+        let touchY : number = e.stageY;
+        // let moveDirection : number = Game.PLAYER_MOVE_RIGHT;
+        let offsetX = touchX - Game.player.m_node.x;
+        let offsetY = touchY - Game.player.m_node.y;
+        if ((offsetX > 0) && (offsetX <= 40)) {
+            offsetX = 0;
+        }
+        if ((offsetY > 0) && (offsetY <= 40)) {
+            offsetY = 0;
+        }
+        if ((offsetX < 0)) { //left 
+            if (offsetY == 0) {  
+                //left
+                Game.player.m_node.x = Game.player.m_node.x - 40;
+            } else if (offsetY < 0) {
+                if ((-offsetX) >= (-offsetY)) {
+                    //left
+                Game.player.m_node.x = Game.player.m_node.x - 40;
+                } else { 
+                Game.player.m_node.y = Game.player.m_node.y - 40;
+                    //up
+                }
+            } else if (offsetY > 0) {
+                if ((-offsetX) >= offsetY) {
+                    //left
+                Game.player.m_node.x = Game.player.m_node.x - 40;
+                } else { 
+                Game.player.m_node.y = Game.player.m_node.y + 40;
+                    //down
+                }
+            }
+            // console.log("    click left ");
+        } else if (offsetX > 0) {        
+            if (offsetY == 0) {  
+                Game.player.m_node.x = Game.player.m_node.x + 40;
+                //right
+            } else if (offsetY < 0) {
+                if ((offsetX) >= (-offsetY)) {
+                Game.player.m_node.x = Game.player.m_node.x + 40;
+                    //right
+                } else { 
+                Game.player.m_node.y = Game.player.m_node.y - 40;
+                    //up
+                }
+            } else if (offsetY > 0) {
+                if (offsetX >= offsetY) {
+                Game.player.m_node.x = Game.player.m_node.x + 40;
+                    //right
+                } else { 
+                Game.player.m_node.y = Game.player.m_node.y + 40;
+                    //down
+                }
+            }
+            // console.log(" click right  ");
+        } else if (offsetX == 0) {
+            if (offsetY == 0) {  
+                //原地
+            } else if (offsetY < 0) {
+                Game.player.m_node.y = Game.player.m_node.y - 40;
+                //up
+            } else if (offsetY > 0) {
+                Game.player.m_node.y = Game.player.m_node.y + 40;
+                //down
+            }
+        }
+        // Game.player.SetCurBlockId();
+        // Game.player.SetMoveDirection();
+    }
 }
