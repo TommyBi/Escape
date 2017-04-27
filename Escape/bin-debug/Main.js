@@ -145,7 +145,7 @@ var Main = (function (_super) {
         Game.player.m_node = this.createBitmapByName("main_json.player");
         Game.player.m_node.x = 0;
         Game.player.m_node.y = 1096;
-        Game.player.SetScreenId(0);
+        Game.player.SetScreenId(1);
         Game.player.SetCurBlockId(433);
         this.addChild(Game.player.m_node);
         // this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPlayerMove, this);
@@ -160,18 +160,36 @@ var Main = (function (_super) {
                     switch (nextScreenNum) {
                         case 1:
                             Game.scrOne.visible = true;
+                            Game.player.SetScreenId(1);
                             break;
                         case 2:
                             Game.scrTwo.visible = true;
+                            Game.player.SetScreenId(2);
                             break;
                         case 3:
                             Game.scrThree.visible = true;
+                            Game.player.SetScreenId(3);
                             break;
                         case 4:
                             Game.scrFour.visible = true;
+                            Game.player.SetScreenId(4);
                             break;
                     }
                 }
+                var row = event.data.nextScreenId / 16;
+                var offsetRow = event.data.nextScreenId % 16;
+                var posX = 0;
+                var posY = 1096;
+                if (offsetRow == 0) {
+                    posX = 600;
+                    posY = row * 40 - 40;
+                }
+                else {
+                    posX = offsetRow * 40 - 40;
+                    posY = row * 40;
+                }
+                Game.player.m_node.x = posX;
+                Game.player.m_node.y = posY;
             }
         }, this);
         // var stageW:number = this.stage.stageWidth;

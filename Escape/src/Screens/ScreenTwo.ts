@@ -48,6 +48,15 @@ namespace Game {
 			return true;
 		}
 
+		//得到当前块是否为门的标识
+		public GetDoorType(id : number) : number {
+			if (this.dataList.length == 0) {
+				return 0;
+			}
+			let item = this.listGrids.dataProvider.getItemAt(id);
+			return item.type;
+		}
+
 		public NotifyBlockUpdate(id:number) : void {
 			//得到当前块关联块id
 

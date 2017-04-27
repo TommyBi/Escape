@@ -13,7 +13,7 @@ namespace Game{
         addGoods:number = 0;
         linkNodeId:string = "";
         linkList:number[] = [];
-        isPass:boolean = false;
+        isAccess:boolean = false;
 
         public constructor(data?){
             super();
@@ -45,7 +45,7 @@ namespace Game{
         addGoods:number = 0;
         linkNodeId:string = "";
         linkList:number[] = [];
-        isPass:boolean = false;
+        isAccess:boolean = false;
 
         public constructor(data?){
             super();

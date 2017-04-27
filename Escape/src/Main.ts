@@ -156,7 +156,7 @@ class Main extends eui.UILayer {
         this.addChild(Game.player.m_node);
         // this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPlayerMove, this);
 
-        Game.playerEvent.addEventListener(Game.PlayerEvent.PLAYERCHANGEMAP, (event: { data: { curItemId:number, curScreen:number ,nextScreen:number} }) => {
+               Game.playerEvent.addEventListener(Game.PlayerEvent.PLAYERCHANGEMAP, (event: { data: { doorId:number, nextScreen:number ,nextScreenId:number} }) => {
             if (event.data) {
                 let nextScreenNum = event.data.nextScreen;
                 if (nextScreenNum){
@@ -183,6 +183,20 @@ class Main extends eui.UILayer {
                         break;
                     }  
                 }
+
+                let row = event.data.nextScreenId / 16
+                let offsetRow = event.data.nextScreenId % 16;
+                let posX = 0;
+                let posY = 1096;
+                if (offsetRow == 0) {
+                    posX = 600;
+                    posY = row * 40 - 40;
+                } else {
+                    posX = offsetRow * 40 - 40;
+                    posY = row * 40;
+                }
+                Game.player.m_node.x = posX;
+                Game.player.m_node.y = posY;
             }
         }, this);
         

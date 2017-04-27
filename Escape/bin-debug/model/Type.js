@@ -4,6 +4,7 @@ var Game;
     var PlayerEvent;
     (function (PlayerEvent) {
         PlayerEvent.PLAYERCHANGEMAP = "PlayerChangeMap";
+        PlayerEvent.PLAYERPASSGRIDS = "PlayerPassGrids";
     })(PlayerEvent = Game.PlayerEvent || (Game.PlayerEvent = {}));
 })(Game || (Game = {}));
 //# sourceMappingURL=Type.js.map
