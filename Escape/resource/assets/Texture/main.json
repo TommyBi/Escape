@@ -1,5 +1,13 @@
 {"file":"main.png","frames":{
-"map_close":{"x":84,"y":42,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
-"map_open":{"x":84,"y":0,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"map_close":{"x":84,"y":0,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"map_open":{"x":42,"y":127,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
 "sister":{"x":0,"y":0,"w":40,"h":52,"offX":0,"offY":0,"sourceW":40,"sourceH":52},
-"player":{"x":42,"y":0,"w":40,"h":41,"offX":0,"offY":0,"sourceW":40,"sourceH":41}}}
+"player":{"x":42,"y":0,"w":40,"h":41,"offX":0,"offY":0,"sourceW":40,"sourceH":41},
+"walldown":{"x":84,"y":42,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"wallleft":{"x":84,"y":84,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"wallright":{"x":42,"y":85,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"wallup":{"x":42,"y":43,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"hardwalldown":{"x":0,"y":138,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"hardwallleft":{"x":84,"y":126,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"hardwallright":{"x":0,"y":96,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40},
+"hardwallup":{"x":0,"y":54,"w":40,"h":40,"offX":0,"offY":0,"sourceW":40,"sourceH":40}}}

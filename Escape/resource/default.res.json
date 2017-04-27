@@ -145,7 +145,7 @@
 			"url": "assets/Texture/main.json",
 			"type": "sheet",
 			"name": "main_json",
-			"subkeys": "map_close,map_open,player,sister"
+			"subkeys": "hardwalldown,hardwallleft,hardwallright,hardwallup,map_close,map_open,player,sister,walldown,wallleft,wallright,wallup"
 		}
 	]
 }
