@@ -46,6 +46,92 @@ var Game;
         p.GetMoveDirection = function () {
             return this.m_moveDirection;
         };
+        p.JudgeCurPlayerValue = function (touchX, touchY) {
+            var moveDirection = Game.player.GetMoveDirection();
+            var offsetX = touchX - Game.player.m_node.x;
+            var offsetY = touchY - Game.player.m_node.y;
+            if ((offsetX > 0) && (offsetX <= 40)) {
+                offsetX = 0;
+            }
+            if ((offsetY > 0) && (offsetY <= 40)) {
+                offsetY = 0;
+            }
+            if ((offsetX < 0)) {
+                if (offsetY == 0) {
+                    //left
+                    moveDirection = 0 /* PLAYER_MOVE_LEFT */;
+                }
+                else if (offsetY < 0) {
+                    if ((-offsetX) >= (-offsetY)) {
+                        moveDirection = 0 /* PLAYER_MOVE_LEFT */;
+                    }
+                    else {
+                        // Game.player.m_node.y = Game.player.m_node.y - 40;
+                        moveDirection = 2 /* PLAYER_MOVE_UP */;
+                    }
+                }
+                else if (offsetY > 0) {
+                    if ((-offsetX) >= offsetY) {
+                        //left
+                        moveDirection = 0 /* PLAYER_MOVE_LEFT */;
+                    }
+                    else {
+                        // Game.player.m_node.y = Game.player.m_node.y + 40;
+                        moveDirection = 3 /* PLAYER_MOVE_DOWN */;
+                    }
+                }
+            }
+            else if (offsetX > 0) {
+                if (offsetY == 0) {
+                    // Game.player.m_node.x = Game.player.m_node.x + 40;
+                    moveDirection = 1 /* PLAYER_MOVE_RIGHT */;
+                }
+                else if (offsetY < 0) {
+                    if ((offsetX) >= (-offsetY)) {
+                        moveDirection = 1 /* PLAYER_MOVE_RIGHT */;
+                    }
+                    else {
+                        // Game.player.m_node.y = Game.player.m_node.y - 40;
+                        moveDirection = 2 /* PLAYER_MOVE_UP */;
+                    }
+                }
+                else if (offsetY > 0) {
+                    if (offsetX >= offsetY) {
+                        // Game.player.m_node.x = Game.player.m_node.x + 40;
+                        moveDirection = 1 /* PLAYER_MOVE_RIGHT */;
+                    }
+                    else {
+                        // Game.player.m_node.y = Game.player.m_node.y + 40;
+                        moveDirection = 3 /* PLAYER_MOVE_DOWN */;
+                    }
+                }
+            }
+            else if (offsetX == 0) {
+                if (offsetY == 0) {
+                }
+                else if (offsetY < 0) {
+                    moveDirection = 2 /* PLAYER_MOVE_UP */;
+                }
+                else if (offsetY > 0) {
+                    moveDirection = 3 /* PLAYER_MOVE_DOWN */;
+                }
+            }
+            var curBlockId = Game.player.GetCurBlockId();
+            if (moveDirection == 0 /* PLAYER_MOVE_LEFT */) {
+                curBlockId -= 1;
+            }
+            else if (moveDirection == 1 /* PLAYER_MOVE_RIGHT */) {
+                curBlockId += 1;
+            }
+            else if (moveDirection == 2 /* PLAYER_MOVE_UP */) {
+                curBlockId -= 16;
+            }
+            else if (moveDirection == 3 /* PLAYER_MOVE_DOWN */) {
+                curBlockId += 16;
+            }
+            Game.player.SetCurBlockId(curBlockId);
+            Game.player.SetMoveDirection(moveDirection);
+        };
         Player.m_pThis = null;
         return Player;
     }());

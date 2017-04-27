@@ -1,6 +1,10 @@
 namespace Game{
     export var playerEvent:Game.AllEvent;
     export var player:Game.Player;
+    export var scrOne:Game.ScreenOne;
+    export var scrTwo:Game.ScreenTwo;
+    export var scrThree:Game.ScreenThree;
+    export var scrFour:Game.ScreenFour;
     export class DataModal extends egret.EventDispatcher {
         _properties = [];
 

@@ -128,47 +128,47 @@ var Main = (function (_super) {
     p.startCreateScene = function () {
         // var sky:egret.Bitmap = this.createBitmapByName("bg_main_jpg");
         // this.addChild(sky);
-        var _this = this;
         // 初始化游戏地图主界面
-        this.scrOne = new Game.ScreenOne();
-        this.scrTwo = new Game.ScreenTwo();
-        this.scrThree = new Game.ScreenThree();
-        this.scrFour = new Game.ScreenFour();
-        this.addChild(this.scrOne);
-        this.addChild(this.scrTwo);
-        this.addChild(this.scrThree);
-        this.addChild(this.scrFour);
-        this.scrFour.visible = false;
-        this.scrThree.visible = false;
-        this.scrTwo.visible = false;
+        Game.scrOne = new Game.ScreenOne();
+        Game.scrTwo = new Game.ScreenTwo();
+        Game.scrThree = new Game.ScreenThree();
+        Game.scrFour = new Game.ScreenFour();
+        this.addChild(Game.scrOne);
+        this.addChild(Game.scrTwo);
+        this.addChild(Game.scrThree);
+        this.addChild(Game.scrFour);
+        Game.scrFour.visible = false;
+        Game.scrThree.visible = false;
+        Game.scrTwo.visible = false;
         Game.playerEvent = new Game.AllEvent();
         Game.player = Game.Player.GetInstance();
         Game.player.m_node = this.createBitmapByName("main_json.player");
         Game.player.m_node.x = 0;
         Game.player.m_node.y = 1096;
         Game.player.SetScreenId(0);
+        Game.player.SetCurBlockId(433);
         this.addChild(Game.player.m_node);
-        this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPlayerMove, this);
+        // this.addEventListener(egret.TouchEvent.TOUCH_TAP, this.onPlayerMove, this);
         Game.playerEvent.addEventListener(Game.PlayerEvent.PLAYERCHANGEMAP, function (event) {
             if (event.data) {
                 var nextScreenNum = event.data.nextScreen;
                 if (nextScreenNum) {
-                    _this.scrOne.visible = false;
-                    _this.scrFour.visible = false;
-                    _this.scrThree.visible = false;
-                    _this.scrTwo.visible = false;
+                    Game.scrOne.visible = false;
+                    Game.scrFour.visible = false;
+                    Game.scrThree.visible = false;
+                    Game.scrTwo.visible = false;
                     switch (nextScreenNum) {
                         case 1:
-                            _this.scrOne.visible = true;
+                            Game.scrOne.visible = true;
                             break;
                         case 2:
-                            _this.scrTwo.visible = true;
+                            Game.scrTwo.visible = true;
                             break;
                         case 3:
-                            _this.scrThree.visible = true;
+                            Game.scrThree.visible = true;
                             break;
                         case 4:
-                            _this.scrFour.visible = true;
+                            Game.scrFour.visible = true;
                             break;
                     }
                 }
@@ -234,122 +234,6 @@ var Main = (function (_super) {
         var texture = RES.getRes(name);
         result.texture = texture;
         return result;
-    };
-    /**
-     * 描述文件加载成功，开始播放动画
-     * Description file loading is successful, start to play the animation
-     */
-    // private startAnimation(result:Array<any>):void {
-    //     var self:any = this;
-    //     var parser = new egret.HtmlTextParser();
-    //     var textflowArr:Array<Array<egret.ITextElement>> = [];
-    //     for (var i:number = 0; i < result.length; i++) {
-    //         textflowArr.push(parser.parser(result[i]));
-    //     }
-    //     var textfield = self.textfield;
-    //     var count = -1;
-    //     var change:Function = function () {
-    //         count++;
-    //         if (count >= textflowArr.length) {
-    //             count = 0;
-    //         }
-    //         var lineArr = textflowArr[count];
-    //         self.changeDescription(textfield, lineArr);
-    //         var tw = egret.Tween.get(textfield);
-    //         tw.to({"alpha": 1}, 200);
-    //         tw.wait(2000);
-    //         tw.to({"alpha": 0}, 200);
-    //         tw.call(change, self);
-    //     };
-    //     change();
-    // }
-    /**
-     * 切换描述内容
-     * Switch to described content
-     */
-    // private changeDescription(textfield:egret.TextField, textFlow:Array<egret.ITextElement>):void {
-    //     textfield.textFlow = textFlow;
-    // }
-    /**
-     * 点击按钮
-     * Click the button
-     */
-    // private onButtonClick(e: egret.TouchEvent) {
-    //     var panel = new eui.Panel();
-    //     panel.title = "Title";
-    //     panel.horizontalCenter = 0;
-    //     panel.verticalCenter = 0;
-    //     this.addChild(panel);
-    // }
-    p.onPlayerMove = function (e) {
-        var touchX = e.stageX;
-        var touchY = e.stageY;
-        // let moveDirection : number = Game.PLAYER_MOVE_RIGHT;
-        var offsetX = touchX - Game.player.m_node.x;
-        var offsetY = touchY - Game.player.m_node.y;
-        if ((offsetX > 0) && (offsetX <= 40)) {
-            offsetX = 0;
-        }
-        if ((offsetY > 0) && (offsetY <= 40)) {
-            offsetY = 0;
-        }
-        if ((offsetX < 0)) {
-            if (offsetY == 0) {
-                //left
-                Game.player.m_node.x = Game.player.m_node.x - 40;
-            }
-            else if (offsetY < 0) {
-                if ((-offsetX) >= (-offsetY)) {
-                    //left
-                    Game.player.m_node.x = Game.player.m_node.x - 40;
-                }
-                else {
-                    Game.player.m_node.y = Game.player.m_node.y - 40;
-                }
-            }
-            else if (offsetY > 0) {
-                if ((-offsetX) >= offsetY) {
-                    //left
-                    Game.player.m_node.x = Game.player.m_node.x - 40;
-                }
-                else {
-                    Game.player.m_node.y = Game.player.m_node.y + 40;
-                }
-            }
-        }
-        else if (offsetX > 0) {
-            if (offsetY == 0) {
-                Game.player.m_node.x = Game.player.m_node.x + 40;
-            }
-            else if (offsetY < 0) {
-                if ((offsetX) >= (-offsetY)) {
-                    Game.player.m_node.x = Game.player.m_node.x + 40;
-                }
-                else {
-                    Game.player.m_node.y = Game.player.m_node.y - 40;
-                }
-            }
-            else if (offsetY > 0) {
-                if (offsetX >= offsetY) {
-                    Game.player.m_node.x = Game.player.m_node.x + 40;
-                }
-                else {
-                    Game.player.m_node.y = Game.player.m_node.y + 40;
-                }
-            }
-        }
-        else if (offsetX == 0) {
-            if (offsetY == 0) {
-            }
-            else if (offsetY < 0) {
-                Game.player.m_node.y = Game.player.m_node.y - 40;
-            }
-            else if (offsetY > 0) {
-                Game.player.m_node.y = Game.player.m_node.y + 40;
-            }
-        }
-        // Game.player.SetCurBlockId();
-        // Game.player.SetMoveDirection();
     };
     return Main;
 }(eui.UILayer));

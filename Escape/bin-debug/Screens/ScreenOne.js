@@ -19,19 +19,25 @@ var Game;
         var d = __define,c=ScreenOne,p=c.prototype;
         p.createChildren = function () {
             var gridsData = []; //448
-            for (var a = 1; a <= 448; a++) {
-                // test data
-                var preData = {
-                    id: a,
-                    type: 1,
-                    screenType: 1
-                };
+            for (var _i = 0, data_escapeOne_1 = Game.data_escapeOne; _i < data_escapeOne_1.length; _i++) {
+                var a = data_escapeOne_1[_i];
+                var preData = new Game.dataEscapeOne(a);
                 gridsData.push(preData);
             }
             this.dataList = new eui.ArrayCollection(gridsData);
             this.listGrids.itemRenderer = mapItemRender;
             this.listGrids.dataProvider = this.dataList;
             this.labelSign.text = "1";
+        };
+        // 
+        p.JudgeIfCanAdvance = function (id) {
+            if (this.dataList.length == 0) {
+                return false;
+            }
+            return true;
+        };
+        p.NotifyBlockUpdate = function (id) {
+            //得到当前块关联块id
         };
         return ScreenOne;
     }(Game.BaseScreen));
@@ -47,9 +53,31 @@ var Game;
         }
         var d = __define,c=mapItemRender,p=c.prototype;
         //响应按钮点击
-        p.onTouch = function () {
+        p.onTouch = function (e) {
             egret.log("touch");
-            this.imgBg.source = RES.getRes("main_json.map_close");
+            //this.imgBg.source = RES.getRes("main_json.map_close");
+            // 更新当前位置点
+            Game.player.JudgeCurPlayerValue(e.stageX, e.stageY);
+            // 换肤
+            var curBlockId = Game.player.GetCurBlockId();
+            var isAdvance = Game.scrOne.JudgeIfCanAdvance(curBlockId);
+            if (isAdvance) {
+            }
+            Game.scrOne.NotifyBlockUpdate(curBlockId);
+            // 移动主角
+            var moveDirection = Game.player.GetMoveDirection();
+            if (moveDirection == 0 /* PLAYER_MOVE_LEFT */) {
+                Game.player.m_node.x = Game.player.m_node.x - 40;
+            }
+            else if (moveDirection == 1 /* PLAYER_MOVE_RIGHT */) {
+                Game.player.m_node.x = Game.player.m_node.x + 40;
+            }
+            else if (moveDirection == 2 /* PLAYER_MOVE_UP */) {
+                Game.player.m_node.y = Game.player.m_node.y - 40;
+            }
+            else if (moveDirection == 3 /* PLAYER_MOVE_DOWN */) {
+                Game.player.m_node.y = Game.player.m_node.y + 40;
+            }
             // 切换界面 参数可以待定
             Game.playerEvent.dispatchEventWith(Game.PlayerEvent.PLAYERCHANGEMAP, false, {
                 curItemId: 1,
@@ -64,22 +92,5 @@ var Game;
     }(CustomItemRenderer));
     Game.mapItemRender = mapItemRender;
     egret.registerClass(mapItemRender,'Game.mapItemRender');
-    /** 格子类型数值 */
-    var GridsModel = (function (_super) {
-        __extends(GridsModel, _super);
-        function GridsModel() {
-            _super.apply(this, arguments);
-            /** id */
-            this.id = 0;
-            /** 类型 */
-            this.type = 0;
-            /** screen */
-            this.screenType = 0;
-        }
-        var d = __define,c=GridsModel,p=c.prototype;
-        return GridsModel;
-    }(Game.DataModal));
-    Game.GridsModel = GridsModel;
-    egret.registerClass(GridsModel,'Game.GridsModel');
 })(Game || (Game = {}));
 //# sourceMappingURL=ScreenOne.js.map

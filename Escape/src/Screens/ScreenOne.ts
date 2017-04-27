@@ -19,6 +19,7 @@ namespace Game {
 
 		//control
 		private dataList:eui.ArrayCollection;
+		private blockIdArray:number[];
 
 		public constructor() {
 			super();
@@ -28,20 +29,30 @@ namespace Game {
 
 		protected createChildren(): void {
 			let gridsData = []; //448
-			for(let a=1;a<=448;a++){
-				// test data
-				let preData = {
-					id:a,
-					type:1,
-					screenType:1
-				}
+			for(let a of data_escapeOne){
+				let preData: dataEscapeOne = new dataEscapeOne(a);
 				gridsData.push(preData);
 			}
+
 			this.dataList = new eui.ArrayCollection(gridsData);
             this.listGrids.itemRenderer = mapItemRender;
             this.listGrids.dataProvider = this.dataList;
 			this.labelSign.text = "1";
         }
+
+		// 
+		public JudgeIfCanAdvance(id:number) : boolean {
+			if (this.dataList.length == 0) {
+				return false;
+			}
+
+			return true;
+		}
+
+		public NotifyBlockUpdate(id:number) : void {
+			//得到当前块关联块id
+
+		}
 	}
 	
 	/** 每一个格子的界面 */
@@ -55,9 +66,33 @@ namespace Game {
 		}
 
 		//响应按钮点击
-		private onTouch(){
+		private onTouch(e: egret.TouchEvent){
 			egret.log("touch");
-			this.imgBg.source = RES.getRes("main_json.map_close");
+			//this.imgBg.source = RES.getRes("main_json.map_close");
+
+			
+			// 更新当前位置点
+			Game.player.JudgeCurPlayerValue(e.stageX, e.stageY);
+			
+			// 换肤
+			let curBlockId : number = Game.player.GetCurBlockId();
+			let isAdvance : boolean = Game.scrOne.JudgeIfCanAdvance(curBlockId);
+			if (isAdvance) {
+
+			}
+			Game.scrOne.NotifyBlockUpdate(curBlockId);
+			
+			// 移动主角
+			let moveDirection : number = Game.player.GetMoveDirection();
+			if (moveDirection == Game.PLAYER_MOVE_TYPE.PLAYER_MOVE_LEFT) {
+                Game.player.m_node.x = Game.player.m_node.x - 40;
+            } else if (moveDirection == Game.PLAYER_MOVE_TYPE.PLAYER_MOVE_RIGHT) {
+                Game.player.m_node.x = Game.player.m_node.x + 40;
+            } else if (moveDirection == Game.PLAYER_MOVE_TYPE.PLAYER_MOVE_UP) {
+                Game.player.m_node.y = Game.player.m_node.y - 40;
+            } else if (moveDirection == Game.PLAYER_MOVE_TYPE.PLAYER_MOVE_DOWN) {
+                Game.player.m_node.y = Game.player.m_node.y + 40;
+            }
 
 			// 切换界面 参数可以待定
 			playerEvent.dispatchEventWith(PlayerEvent.PLAYERCHANGEMAP,false,{
@@ -70,15 +105,5 @@ namespace Game {
 		protected dataChanged(): void {
 			egret.log("datachanged");
 		} 
-	}
-
-	/** 格子类型数值 */
-	export class GridsModel extends DataModal {
-		/** id */
-		public id:number = 0;
-		/** 类型 */
-		public type:number = 0;
-		/** screen */
-		public screenType:number = 0;
 	}
 }
