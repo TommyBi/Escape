@@ -19,6 +19,7 @@ var game_file_list = [
 	"bin-debug/agf/List.js",
 	"bin-debug/agf/stopwatch.js",
 	"bin-debug/agf/utils.js",
+	"bin-debug/model/DataExport.js",
 	"bin-debug/model/Player.js",
 	"bin-debug/model/Type.js",
 	"bin-debug/other/AssetAdapter.js",
