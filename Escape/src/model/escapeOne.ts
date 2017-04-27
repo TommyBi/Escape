@@ -25,6 +25,9 @@ namespace Game{
             if(this.linkNodeId.length >0){
                 let a = this.linkNodeId.split(',');
                 for(let b of a){
+                    if (b == "0"){
+                        break;
+                    }
                     this.linkList.push(parseInt(b));
                 }
             }

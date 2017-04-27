@@ -27,6 +27,9 @@ var Game;
                 var a = this.linkNodeId.split(',');
                 for (var _i = 0, a_1 = a; _i < a_1.length; _i++) {
                     var b = a_1[_i];
+                    if (b == "0") {
+                        break;
+                    }
                     this.linkList.push(parseInt(b));
                 }
             }
