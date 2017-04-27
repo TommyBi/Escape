@@ -19,8 +19,18 @@ var Game;
             this.linkList = [];
             this.isPass = false;
             this.setData(data);
+            this.getLinks();
         }
         var d = __define,c=dataEscapeOne,p=c.prototype;
+        p.getLinks = function () {
+            if (this.linkNodeId.length > 0) {
+                var a = this.linkNodeId.split(',');
+                for (var _i = 0, a_1 = a; _i < a_1.length; _i++) {
+                    var b = a_1[_i];
+                    this.linkList.push(parseInt(b));
+                }
+            }
+        };
         return dataEscapeOne;
     }(Game.DataModal));
     Game.dataEscapeOne = dataEscapeOne;

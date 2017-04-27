@@ -18,7 +18,17 @@ namespace Game{
         public constructor(data?){
             super();
             this.setData(data);
+            this.getLinks();
         }
         
+        public getLinks(){
+            if(this.linkNodeId.length >0){
+                let a = this.linkNodeId.split(',');
+                for(let b of a){
+                    this.linkList.push(parseInt(b));
+                }
+            }
+        }
+
     }
 }

@@ -29,7 +29,7 @@ var Game;
             this.listGrids.dataProvider = this.dataList;
             this.labelSign.text = "1";
         };
-        // 
+        // 获取当前节点的元素，并判断是否可以通过，并进行换肤操作
         p.JudgeIfCanAdvance = function (id) {
             if (this.dataList.length == 0) {
                 return false;
@@ -78,12 +78,12 @@ var Game;
             else if (moveDirection == 3 /* PLAYER_MOVE_DOWN */) {
                 Game.player.m_node.y = Game.player.m_node.y + 40;
             }
-            // 切换界面 参数可以待定
-            Game.playerEvent.dispatchEventWith(Game.PlayerEvent.PLAYERCHANGEMAP, false, {
-                curItemId: 1,
-                curScreen: 1,
-                nextScreen: 2,
-            });
+            // // 切换界面 参数可以待定
+            // playerEvent.dispatchEventWith(PlayerEvent.PLAYERCHANGEMAP,false,{
+            // 		curItemId:1,
+            // 		curScreen:1,
+            // 		nextScreen:2,
+            // })
         };
         p.dataChanged = function () {
             egret.log("datachanged");

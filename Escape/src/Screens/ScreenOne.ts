@@ -40,7 +40,7 @@ namespace Game {
 			this.labelSign.text = "1";
         }
 
-		// 
+		// 获取当前节点的元素，并判断是否可以通过，并进行换肤操作
 		public JudgeIfCanAdvance(id:number) : boolean {
 			if (this.dataList.length == 0) {
 				return false;
@@ -94,12 +94,12 @@ namespace Game {
                 Game.player.m_node.y = Game.player.m_node.y + 40;
             }
 
-			// 切换界面 参数可以待定
-			playerEvent.dispatchEventWith(PlayerEvent.PLAYERCHANGEMAP,false,{
-					curItemId:1,
-					curScreen:1,
-					nextScreen:2,
-                })
+			// // 切换界面 参数可以待定
+			// playerEvent.dispatchEventWith(PlayerEvent.PLAYERCHANGEMAP,false,{
+			// 		curItemId:1,
+			// 		curScreen:1,
+			// 		nextScreen:2,
+            // })
 		}
 
 		protected dataChanged(): void {
