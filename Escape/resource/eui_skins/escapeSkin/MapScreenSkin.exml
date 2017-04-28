@@ -3,11 +3,9 @@
 	<w:Config id="15bae311c05"/>
 	<e:Image source="bg_main_jpg" x="0" y="0" anchorOffsetY="0" height="1136" visible="false"/>
 	<e:Group id="GroupMapItem" left="0" right="0" bottom="8" top="8">
-		<e:DataGroup id="listGrids" left="0" right="0" top="0" bottom="0" itemRendererSkinName="MapItemSkin">
-			<e:layout>
-				<e:TileLayout horizontalGap="0" verticalGap="0" requestedRowCount="28" requestedColumnCount="16"/>
-			</e:layout>
-		</e:DataGroup>
 		<e:Label id="labelSign" text="Label" x="72" y="108"/>
+		<e:layout>
+			<e:TileLayout horizontalGap="0" verticalGap="0" requestedRowCount="28" requestedColumnCount="16"/>
+		</e:layout>
 	</e:Group>
 </e:Skin>

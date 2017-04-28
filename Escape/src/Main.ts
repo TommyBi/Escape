@@ -134,18 +134,9 @@ class Main extends eui.UILayer {
         // this.addChild(sky);
 
         // 初始化游戏地图主界面
-        Game.scrOne = new Game.ScreenOne();
-        Game.scrTwo = new Game.ScreenTwo();
-        Game.scrThree = new Game.ScreenThree();
-        Game.scrFour = new Game.ScreenFour();
-        this.addChild(Game.scrOne);
-        this.addChild(Game.scrTwo);
-        this.addChild(Game.scrThree);
-        this.addChild(Game.scrFour);
-        Game.scrFour.visible = false;
-        Game.scrThree.visible = false;
-        Game.scrTwo.visible = false;  
         Game.playerEvent = new Game.AllEvent();
+        Game.scrOne = new Game.ScreenOne();
+        this.addChild(Game.scrOne);
 
         Game.player  = Game.Player.GetInstance();
         Game.player.m_node = this.createBitmapByName("main_json.player");
@@ -161,25 +152,10 @@ class Main extends eui.UILayer {
                 let nextScreenNum = event.data.nextScreen;
                 if (nextScreenNum){
                     Game.scrOne.visible = false;
-                    Game.scrFour.visible = false;
-                    Game.scrThree.visible = false;
-                    Game.scrTwo.visible = false;  
                     switch(nextScreenNum){
                         case 1:
                             Game.scrOne.visible = true;
                             Game.player.SetScreenId(1);
-                        break;
-                        case 2: 
-                            Game.scrTwo.visible = true;
-                            Game.player.SetScreenId(2);
-                        break;
-                        case 3:
-                            Game.scrThree.visible = true;
-                            Game.player.SetScreenId(3);
-                        break;
-                        case 4:
-                            Game.scrFour.visible = true;
-                            Game.player.SetScreenId(4);
                         break;
                     }  
                 }
